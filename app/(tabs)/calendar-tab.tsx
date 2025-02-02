@@ -4,7 +4,7 @@ import { SFSymbols6_0 } from 'sf-symbols-typescript';
 import { IconSymbol } from '@/components/ui-example/IconSymbol';
 import { StyleSheet, View, type ViewProps } from 'react-native';
 import PaletteColor, {ColorElement, ColorTheme} from "@/components/ui/color-manager"
-import CalendarWeek from "@/components/ui/calendar-week";
+import CalendarMonth from "@/components/ui/calendar-month";
 
 
 const HEADER_HEIGHT = 250;
@@ -70,7 +70,7 @@ export default function CalendarTab () {
                 styles.calendarView, 
                 {backgroundColor:PaletteColor(ColorElement.APP_BACKGROUND)}
                 ]}>
-                <CalendarWeek children={1} year={2025} month={2} day={2}></CalendarWeek>
+                <CalendarMonth children={1} year={2025} month={2} day={2}></CalendarMonth>
             </View>
             <View style={[
                 styles.footer,

@@ -4,9 +4,9 @@ import { Button, StyleSheet, Text, View } from 'react-native';
 import PaletteColor, {ColorElement} from "@/components/ui/color-manager"
 
 const styles = StyleSheet.create({
-      content: {
+      dayContent: {
         flex: 1,
-        alignSelf: "flex-start",
+        alignSelf: "center",
         flexDirection: "column",
         padding: 1,
         gap: 1,
@@ -32,7 +32,7 @@ type Props = PropsWithChildren<{
 export default function CalendarDay({children, year, month, day}:Props) {
     var weekday = GetShortWeekString(year, month, day);
     return(
-        <View style={[styles.content,{backgroundColor:PaletteColor(ColorElement.HEADER_BACKGROUND)}]}>
+        <View style={[styles.dayContent,{backgroundColor:PaletteColor(ColorElement.HEADER_BACKGROUND)}]}>
             <Text style={[styles.text,{color:PaletteColor(ColorElement.BODY_TEXT)}]}>{weekday}</Text>
             <Text style={[styles.text,{color:PaletteColor(ColorElement.BODY_TEXT)}]}>{day.toString()}</Text>
             {/*<Button title="Notes"/>*/}
