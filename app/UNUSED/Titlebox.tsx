@@ -1,6 +1,6 @@
 import { StyleSheet, Image, Platform } from 'react-native';
-import { ThemedText, ThemedTextProps } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+import { ThemedText, ThemedTextProps } from '@/components/ui-example/ThemedText';
+import { ThemedView } from '@/components/ui-example/ThemedView';
 import { Text, View } from 'react-native';
 
 const styles = StyleSheet.create({

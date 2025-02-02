@@ -1,40 +1,68 @@
 import React, {useState} from 'react';
 import {Alert, Modal, StyleSheet, Text, Pressable, View} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
+import { Component } from 'react';
 
-const TestModal = () => {
-  const [modalVisible, setModalVisible] = useState(false);
-  return (
-    <SafeAreaProvider>
-      <SafeAreaView style={styles.centeredView}>
-        <Modal
-          animationType="slide"
-          transparent={true}
-          visible={modalVisible}
-          onRequestClose={() => {
-            Alert.alert('Modal has been closed.');
-            setModalVisible(!modalVisible);
-          }}>
-          <View style={styles.centeredView}>
-            <View style={styles.modalView}>
-              <Text style={styles.modalText}>Hello World!</Text>
-              <Pressable
-                style={[styles.button, styles.buttonClose]}
-                onPress={() => setModalVisible(!modalVisible)}>
-                <Text style={styles.textStyle}>Hide Modal</Text>
-              </Pressable>
+interface TestModalProps{
+
+}
+
+interface TestModalState{
+  modalVisible: boolean,
+}
+
+export default class TestModal extends Component <TestModalProps, TestModalState> {
+  constructor(props:TestModalProps={}, state: TestModalState={modalVisible:false})
+  {
+    super(props);
+    this.state = { modalVisible: false, }
+    this.handleOpenModal = this.handleOpenModal.bind(this);
+    this.handleCloseModal = this.handleCloseModal.bind(this);
+    this.render = this.render.bind(this); // might need to have binded......... Not working!!!!!!!! (untested)
+  }
+
+
+  handleOpenModal = () => {
+    this.setState({ modalVisible: true });
+  };
+
+  handleCloseModal = () => {
+    this.setState({ modalVisible: false });
+  }
+
+  render = () => {
+    return (
+      <SafeAreaProvider>
+        <SafeAreaView style={styles.centeredView}>
+          <Modal
+            animationType="slide"
+            transparent={true}
+            visible={this.state.modalVisible}
+            onRequestClose={() => {
+              Alert.alert('Modal has been closed.');
+              this.handleCloseModal();
+            }}>
+            <View style={styles.centeredView}>
+              <View style={styles.modalView}>
+                <Text style={styles.modalText}>Hello World!</Text>
+                <Pressable
+                  style={[styles.button, styles.buttonClose]}
+                  onPress={() => this.handleCloseModal()}>
+                  <Text style={styles.textStyle}>Hide Modal</Text>
+                </Pressable>
+              </View>
             </View>
-          </View>
-        </Modal>
-        <Pressable
-          style={[styles.button, styles.buttonOpen]}
-          onPress={() => setModalVisible(true)}>
-          <Text style={styles.textStyle}>Show Modal</Text>
-        </Pressable>
-      </SafeAreaView>
-    </SafeAreaProvider>
-  );
-};
+          </Modal>
+          <Pressable
+            style={[styles.button, styles.buttonOpen]}
+            onPress={() => this.handleOpenModal()}>
+            <Text style={styles.textStyle}>Show Modal</Text>
+          </Pressable>
+        </SafeAreaView>
+      </SafeAreaProvider>
+    );
+  };
+} 
 
 const styles = StyleSheet.create({
   centeredView: {
@@ -78,5 +106,3 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 });
-
-export default TestModal;

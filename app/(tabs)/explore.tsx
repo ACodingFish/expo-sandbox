@@ -1,11 +1,11 @@
 import { StyleSheet, Image, Platform } from 'react-native';
 
-import { Collapsible } from '@/components/Collapsible';
-import { ExternalLink } from '@/components/ExternalLink';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText, ThemedTextProps } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
-import { IconSymbol } from '@/components/ui/IconSymbol';
+import { Collapsible } from '@/components/ui-example/Collapsible';
+import { ExternalLink } from '@/components/ui-example/ExternalLink';
+import ParallaxScrollView from '@/components/ui-example/ParallaxScrollView';
+import { ThemedText, ThemedTextProps } from '@/components/ui-example/ThemedText';
+import { ThemedView } from '@/components/ui-example/ThemedView';
+import { IconSymbol } from '@/components/ui-example/IconSymbol';
 import { Text, Button, View } from 'react-native';
 import React, {Component} from 'react';
 
