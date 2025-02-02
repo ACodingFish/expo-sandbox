@@ -5,8 +5,10 @@ import PaletteColor, {ColorElement} from "@/components/ui/color-manager"
 
 const styles = StyleSheet.create({
       content: {
-        flex: 0,
-        padding: 10,
+        flex: 1,
+        alignSelf: "flex-start",
+        flexDirection: "column",
+        padding: 1,
         gap: 1,
         overflow: 'hidden',
       },
@@ -42,14 +44,14 @@ const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Frida
 const month_code = [0, 3, 3, 6, 1, 4, 6, 2, 5, 0, 3, 5];
 const century_code = [4, 2, 0, 6, 4, 2, 0];     // gregorian dates only :P No Julian dates
 //https://artofmemory.com/blog/how-to-calculate-the-day-of-the-week/
-function GetWeekDay(year: number, month: number, day: number){
+export function GetWeekDay(year: number, month: number, day: number){
     let weekday = (Math.floor(1.25*(year%100))                      // year code
                 + month_code[month-1]                               // month code
                 + century_code[(Math.floor(year/100)-17)]           // century code
                 + day                                               // day
     );
 
-    if (((year%100)!=0) && ((year%4)==0) && (month < 3)){                      // leap year
+    if (IsLeapYear(year) && (month < 3)){                      // leap year
         weekday--;                                     // subtract one if leap year
     }
     weekday%=7;
@@ -67,4 +69,9 @@ function GetShortWeekString(year:number, month:number,day:number)
     let ret = GetWeekString(year, month, day);
     ret = ret.substring(0,3);
     return ret;
+}
+
+export function IsLeapYear(year:number)
+{
+    return ((year%100)!=0) && ((year%4)==0);
 }
