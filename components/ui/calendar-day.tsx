@@ -75,3 +75,65 @@ export function IsLeapYear(year:number)
 {
     return ((year%100)!=0) && ((year%4)==0);
 }
+
+// export enum Months{
+//     January,
+//     February,
+//     March,
+//     April,
+//     May,
+//     June,
+//     July,
+//     August,
+//     September,
+//     October,
+//     November,
+//     December
+// }
+
+const month_days =[31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]; // does not account for leap year
+export function GetNextDate(date:{year:number, month:number, day:number})
+{
+    let max_month_days = month_days[date.month-1];
+    let ret = {year:(date.year), month:(date.month), day:(date.day)};
+    if (IsLeapYear(date.year) && (date.month==2))
+    {
+        max_month_days++;
+    }
+    if ((date.day) < month_days[date.month-1]){
+        ret={year:(date.year), month:(date.month), day:(date.day+1)};
+    } else if (date.month < 12){
+        ret={year:(date.year), month:(date.month+1), day:1};
+    } else{
+        ret={year:(date.year+1), month:1, day:1};
+    }
+    return ret;
+}
+
+export function GetPrevDate(date:{year:number, month:number, day:number}){
+    let max_month_days = month_days[date.month-1];
+    let ret = date;
+
+    if (IsLeapYear(date.year) && (date.month==2))
+    {
+        max_month_days++;
+    }
+    if (date.day > 1){
+        ret={year:(date.year), month:(date.month), day:(date.day-1)};
+    } else if (date.month > 1){
+        ret={year:(date.year), month:(date.month-1), day:max_month_days};
+    } else{
+        ret={year:(date.year-1), month:12, day:max_month_days};
+    }
+    return ret;
+}
+
+export function GetLastMonthDay(year:number, month:number)
+{
+    var ret = month_days[month-1];
+    if (IsLeapYear(year) && (month==2))
+    {
+        ret++;
+    }
+    return ret;
+}
