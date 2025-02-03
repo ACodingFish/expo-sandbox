@@ -112,6 +112,7 @@ export function GetNextDate(date:{year:number, month:number, day:number})
 
 export function GetPrevDate(date:{year:number, month:number, day:number}){
     let max_month_days = month_days[date.month-1];
+    let prev_max_month_days = month_days[(date.month+10)%12]; // Subtract 2 months (circular)
     let ret = date;
 
     if (IsLeapYear(date.year) && (date.month==2))
@@ -121,9 +122,9 @@ export function GetPrevDate(date:{year:number, month:number, day:number}){
     if (date.day > 1){
         ret={year:(date.year), month:(date.month), day:(date.day-1)};
     } else if (date.month > 1){
-        ret={year:(date.year), month:(date.month-1), day:max_month_days};
+        ret={year:(date.year), month:(date.month-1), day:prev_max_month_days};
     } else{
-        ret={year:(date.year-1), month:12, day:max_month_days};
+        ret={year:(date.year-1), month:12, day:31};
     }
     return ret;
 }
